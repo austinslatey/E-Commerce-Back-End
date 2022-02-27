@@ -8,17 +8,11 @@ router.get('/', (req, res) => {
   // be sure to include its associated Product data
   Tag.findAll({
     include: {
-      model: Tag,
-      attributes: ['id', 'product_name', 'price', 'inventory', 'catergory_id']
+      model: Product,
+      attributes: ['product_name', 'price', 'stock', 'catergory_id']
     }
   })
-  .then(dbTagData => {
-    if (!dbTagData) {
-      res.status(404).json({message: 'Nothing found'});
-      return;
-    }
-    res.json(dbTagData);
-  })
+  .then(dbTagData =>  res.json(dbTagData))
   .catch(err => {
     console.log(err);
     res.status(500).json(err)
@@ -33,17 +27,11 @@ router.get('/:id', (req, res) => {
       id: req.params.id
     },
     include: {
-      model: Tag,
-      attributes: ['id', 'product_name', 'price', 'inventory', 'catergory_id']
+      model: Product,
+      attributes: ['product_name', 'price', 'stock', 'catergory_id']
     }
   })
-  .then(dbTagData => {
-    if (!dbTagData) {
-      res.status(404).json({message: 'Nothing found'});
-      return;
-    }
-    res.json(dbTagData);
-  })
+  .then(dbTagData => res.json(dbTagData))
   .catch(err => {
     console.log(err);
     res.status(500).json(err)
@@ -54,13 +42,7 @@ router.post('/', (req, res) => {
   // create a new tag
   Tag.create({
     tag_name: req.body.tag_name
-  }).then(dbTagData => {
-    if (!dbTagData) {
-      res.status(404).json({message: 'Nothing found'});
-      return;
-    }
-    res.json(dbTagData);
-  })
+  }).then(dbTagData => res.json(dbTagData))
   .catch(err => {
     console.log(err);
     res.status(500).json(err)
@@ -92,13 +74,7 @@ router.delete('/:id', (req, res) => {
     where: {
       id: req.params.id
     }
-  }).then(dbTagData => {
-    if (!dbTagData) {
-      res.status(404).json({message: 'Nothing found'});
-      return;
-    }
-    res.json(dbTagData);
-  })
+  }).then(dbTagData => res.json(dbTagData))
   .catch(err => {
     console.log(err);
     res.status(500).json(err)
