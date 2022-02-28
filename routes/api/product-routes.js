@@ -47,7 +47,7 @@ router.get('/:id', (req, res) => {
     ]
   }).then(dbProductData => {
     if (!dbProductData) {
-      res.status(404).json({ message: 'Nothing found' });
+      res.status(404).json({ message: 'Cannot find product by ID' });
       return;
     }
     res.json(dbProductData);
@@ -138,7 +138,7 @@ router.delete('/:id', (req, res) => {
     }
   }).then(dbProductData => {
     if (!dbProductData) {
-      res.status(404).json({ message: 'Nothing found' });
+      res.status(404).json({ message: 'Cannot find by ID' });
       return;
     }
     res.json(dbProductData);
